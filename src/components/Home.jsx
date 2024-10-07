@@ -5,7 +5,6 @@ import predictionImg from "../assets/prediction.jpeg";
 import visualizationImg from "../assets/Visualization.jpeg";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Testimonials from "./Testimonials/Testimonials.jsx";
 
 const Home = () => {
   return (
@@ -292,9 +291,7 @@ const Home = () => {
           stiffness: 100,
           delay: 1,
         }}
-      >
-        <Testimonials />
-      </motion.div>
+      ></motion.div>
     </div>
   );
 };

@@ -4,14 +4,14 @@ import axios from "axios";
 
 const Prediction = () => {
   const [userInput, setUserInput] = useState({
-    Age: "",
     Pregnancies: "",
     Glucose: "",
     BloodPressure: "",
+    SkinThickness: "",
     Insulin: "",
     BMI: "",
-    SkinThickness: "",
-    DPF: "",
+    DiabetesPedigreeFunction: "",
+    Age: "",
   });
   const [prediction, setPrediction] = useState(null);
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -21,7 +21,7 @@ const Prediction = () => {
     setButtonDisabled(true);
     try {
       const response = await axios.post(
-        "https://diabetes-prediction-1-6a5i.onrender.com/predict",
+        "https://diabetes-predication-api-99d19fe60c9f.herokuapp.com/diabetes_prediction",
         userInput
       );
       setPrediction(response.data);
@@ -170,15 +170,15 @@ const Prediction = () => {
                 </div>
                 <div className="mb-4">
                   <label
-                    htmlFor="DPF"
+                    htmlFor="DiabetesPedigreeFunction"
                     className="block text-gray-700 font-bold mb-2"
                   >
                     DPF
                   </label>
                   <input
                     type="number"
-                    name="DPF"
-                    value={userInput.DPF}
+                    name="DiabetesPedigreeFunction"
+                    value={userInput.DiabetesPedigreeFunction}
                     onChange={handleChange}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-purple-500"
                   />
@@ -218,27 +218,54 @@ const Prediction = () => {
                 About the Parameters
               </h2>
               <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                <li><strong>Age:</strong> The age of the patient. Age is a risk factor because the likelihood of developing diabetes increases as you get older.</li>
-                <li><strong>Pregnancies:</strong> The number of times the patient has been pregnant. Pregnancy can affect insulin sensitivity, and a higher number of pregnancies might indicate a higher risk of developing diabetes.</li>
-                <li><strong>Glucose:</strong> Plasma glucose concentration after a 2-hour oral glucose tolerance test. High glucose levels are a primary indicator of diabetes.</li>
-                <li><strong>Blood Pressure:</strong> Diastolic blood pressure (mm Hg). High blood pressure is associated with an increased risk of diabetes and its complications.</li>
-                <li><strong>Insulin:</strong> 2-Hour serum insulin (mu U/ml). Abnormal insulin levels can be a sign of insulin resistance, a condition often associated with diabetes.</li>
-                <li><strong>BMI:</strong> Body Mass Index (weight in kg/(height in m)^2). Higher BMI values indicate obesity, which is a major risk factor for diabetes.</li>
-                <li><strong>Skin Thickness:</strong> Triceps skin fold thickness (mm). This measure can indicate body fat distribution, which is related to diabetes risk.</li>
-                <li><strong>DPF:</strong> Diabetes Pedigree Function. This function estimates the genetic impact on diabetes by considering family history, helping to understand hereditary risk.</li>
+                <li>
+                  <strong>Age:</strong> The age of the patient. Age is a risk
+                  factor because the likelihood of developing diabetes increases
+                  as you get older.
+                </li>
+                <li>
+                  <strong>Pregnancies:</strong> The number of times the patient
+                  has been pregnant. Pregnancy can affect insulin sensitivity,
+                  and a higher number of pregnancies might indicate a higher
+                  risk of developing diabetes.
+                </li>
+                <li>
+                  <strong>Glucose:</strong> Plasma glucose concentration after a
+                  2-hour oral glucose tolerance test. High glucose levels are a
+                  primary indicator of diabetes.
+                </li>
+                <li>
+                  <strong>Blood Pressure:</strong> Diastolic blood pressure (mm
+                  Hg). High blood pressure is associated with an increased risk
+                  of diabetes and its complications.
+                </li>
+                <li>
+                  <strong>Insulin:</strong> 2-Hour serum insulin (mu U/ml).
+                  Abnormal insulin levels can be a sign of insulin resistance, a
+                  condition often associated with diabetes.
+                </li>
+                <li>
+                  <strong>BMI:</strong> Body Mass Index (weight in kg/(height in
+                  m)^2). Higher BMI values indicate obesity, which is a major
+                  risk factor for diabetes.
+                </li>
+                <li>
+                  <strong>Skin Thickness:</strong> Triceps skin fold thickness
+                  (mm). This measure can indicate body fat distribution, which
+                  is related to diabetes risk.
+                </li>
+                <li>
+                  <strong>DPF:</strong> Diabetes Pedigree Function. This
+                  function estimates the genetic impact on diabetes by
+                  considering family history, helping to understand hereditary
+                  risk.
+                </li>
               </ul>
             </div>
           )}
           {prediction && (
             <div className="bg-green-100 border mx-auto flex flex-col gap-5 border-green-400 text-green-700 py-2 rounded text-center max-w-3xl">
-              <img
-                src={prediction.gif_url}
-                alt="Prediction GIF"
-                className="mx-auto pt-4 rounded-md"
-              />
-              <p className="font-bold text-2xl px-3 mx-2 ">
-                {prediction.prediction}
-              </p>
+              <p className="font-bold text-2xl px-3 mx-2 ">{prediction}</p>
             </div>
           )}
         </motion.div>
